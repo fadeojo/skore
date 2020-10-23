@@ -1,0 +1,118 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LoginOutput {
+  access: String!
+  id: String!
+  scope: String!
+  expires: Float!
+  type: String!
+}
+
+type User {
+  email: String!
+  aud: String!
+  email_verified: String!
+  exp: Float!
+  family_name: String!
+  given_name: String!
+  iat: Float!
+  iss: String!
+  name: String!
+  nickname: String!
+  picture: String!
+  sub: String!
+  updated_at: String!
+}
+
+type Location {
+  type: String!
+  coordinates: [Float!]!
+}
+
+type Profile {
+  id: ID!
+  userId: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  businessName: String!
+  industry: String!
+  accountType: AccountType!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String
+  line: String!
+  lineAlt: String
+  city: String!
+  state: String!
+  postalCode: String!
+  placeId: String!
+  country: String!
+  location: Location!
+}
+
+"""Account types"""
+enum AccountType {
+  SHIPPER
+  BROKER
+  DRIVER
+}
+
+type Query {
+  hello: LoginOutput!
+  getUser: User!
+  getProfile: Profile!
+}
+
+type Mutation {
+  login(login: LoginInput!): LoginOutput!
+  createProfile(profile: CreateProfileInput!): Profile!
+  updateProfile(profile: UpdateProfileInput!): Profile!
+  deleteProfile: Profile!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateProfileInput {
+  firstName: String!
+  lastName: String!
+  phone: String!
+  businessName: String!
+  accountType: AccountType!
+  industry: String!
+  line: String!
+  lineAlt: String
+  city: String!
+  state: String!
+  postalCode: String!
+  placeId: String!
+  country: String!
+  location: LocationInput!
+}
+
+input LocationInput {
+  type: String!
+  coordinates: [Float!]!
+}
+
+input UpdateProfileInput {
+  firstName: String
+  lastName: String
+  phone: String
+  businessName: String
+  accountType: AccountType
+  industry: String
+  line: String
+  lineAlt: String
+  city: String
+  state: String
+  postalCode: String
+  placeId: String
+  country: String
+  location: LocationInput
+}

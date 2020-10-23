@@ -1,0 +1,17 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "@skore/auth/(.*)": "<rootDir>/../libs/auth/src/$1",
+    "@skore/auth": "<rootDir>/../libs/auth/src",
+    "@skore/skore-exception/(.*)": "<rootDir>/../libs/skore-exception/src/$1",
+    "@skore/skore-exception": "<rootDir>/../libs/skore-exception/src",
+    "@skore/mailer/(.*)": "<rootDir>/../libs/mailer/src/$1",
+    "@skore/mailer": "<rootDir>/../libs/mailer/src"
+  }
+}
