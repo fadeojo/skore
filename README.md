@@ -29,11 +29,6 @@ MAILGUN_DOMAIN
 # development watch mode
 $ make up
 
-# debug watch mode
-$ make debug
-
-# production mode
-$ make prod
 ```
 
 ## Test
