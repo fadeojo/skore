@@ -26,14 +26,14 @@ MAILGUN_DOMAIN
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# development watch mode
+$ make up
 
-# watch mode
-$ npm run start:dev
+# debug watch mode
+$ make debug
 
 # production mode
-$ npm run start:prod
+$ make prod
 ```
 
 ## Test

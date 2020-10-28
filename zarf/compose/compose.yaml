@@ -1,0 +1,27 @@
+version: '3.8'
+
+networks:
+  shared-network:
+    driver: bridge
+
+services:
+  zipkin:
+    container_name: zipkin
+    networks:
+      - shared-network
+    image: openzipkin/zipkin:2.21
+    ports:
+      - 9411:9411
+
+  skore-db:
+    container_name: skore-db
+    networks:
+      - shared-network
+    image: postgis/postgis:10-2.5
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ../../postgres-data:/var/lib/postgresql/data
+      - ../../init.sql:/docker-entrypoint-initdb.d/init.sql

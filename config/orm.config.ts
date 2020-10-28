@@ -10,7 +10,7 @@ let config = {};
 const environments = {
   production: {
     type: 'postgres',
-    url: process.env.DATABASE_URL || 5432,
+    url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost/logistic_dev',
     synchronize: false,
     logging: true,
     cli: {
@@ -22,7 +22,7 @@ const environments = {
   test: {
     type: 'postgres',
     host: 'localhost',
-    port: 5432,
+    port: 5433,
     username: 'postgres',
     password: 'postgres',
     database: 'skore_test',
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV) {
 } else {
   config = {
     type: 'postgres',
-    host: 'localhost',
+    host: 'skore-db',
     port: 5432,
     username: 'postgres',
     password: 'postgres',

@@ -1,0 +1,2 @@
+CREATE DATABASE skore_dev;
+CREATE DATABASE skore_test; 

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  skore-api:
+    restart: always
+    container_name: skore-api
+    build:
+      context: ../..
+      dockerfile: zarf/docker/dockerfile.dev
+    ports:
+      - 3000:3000 # GRAPHQL API
+      - 9229:9229
+    networks:
+      - shared-network
+    volumes:
+      - /app/node_modules
+      - ../../:/app
+    depends_on:
+      - zipkin
+      - skore-db
