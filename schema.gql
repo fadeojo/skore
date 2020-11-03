@@ -37,8 +37,6 @@ type Profile {
   firstName: String!
   lastName: String!
   phone: String!
-  businessName: String!
-  industry: String!
   accountType: AccountType!
   createdAt: String!
   updatedAt: String!
@@ -82,9 +80,7 @@ input CreateProfileInput {
   firstName: String!
   lastName: String!
   phone: String!
-  businessName: String!
   accountType: AccountType!
-  industry: String!
   line: String!
   lineAlt: String
   city: String!
@@ -104,9 +100,7 @@ input UpdateProfileInput {
   firstName: String
   lastName: String
   phone: String
-  businessName: String
   accountType: AccountType
-  industry: String
   line: String
   lineAlt: String
   city: String

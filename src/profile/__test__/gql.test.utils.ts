@@ -10,8 +10,6 @@ export const getProfileQuery = {
         firstName
         lastName
         phone
-        businessName
-        industry
         accountType
         createdAt
         updatedAt
@@ -40,8 +38,6 @@ export const createProfile = {
         firstName
         lastName
         phone
-        businessName
-        industry
         accountType
         createdAt
         updatedAt
@@ -65,8 +61,6 @@ export const createProfile = {
       lastName: 'Adeojo',
       phone: '6131231234',
       accountType: 'SHIPPER',
-      businessName: 'some business name',
-      industry: 'industry',
       city: 'Ottawa',
       country: 'Canada',
       line: '26 Auriga Drive',
@@ -90,8 +84,6 @@ export const updateProfile = {
         firstName
         lastName
         phone
-        businessName
-        industry
         accountType
         createdAt
         updatedAt
@@ -123,8 +115,6 @@ export const deleteProfile = {
         firstName
         lastName
         phone
-        businessName
-        industry
         accountType
         createdAt
         updatedAt

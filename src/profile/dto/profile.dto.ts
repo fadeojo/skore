@@ -32,14 +32,8 @@ export class CreateProfileInputRepositoryDTO {
   @Field()
   phone: string;
 
-  @Field()
-  businessName: string;
-
   @Field(() => AccountType)
   accountType: AccountType;
-
-  @Field()
-  industry: string;
 
   @Field(() => String)
   line: string;

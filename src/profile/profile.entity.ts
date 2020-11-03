@@ -43,7 +43,7 @@ export class Profile {
   id: number;
 
   @Field(() => String)
-  @Column({ name: 'user_id' })
+  @Column({ name: 'user_id', unique: true })
   userId: string;
 
   @Field(() => String)
@@ -57,14 +57,6 @@ export class Profile {
   @Field(() => String)
   @Column()
   phone: string;
-
-  @Field(() => String)
-  @Column({ name: 'business_name' })
-  businessName: string;
-
-  @Field(() => String)
-  @Column({ name: 'industry' })
-  industry: string;
 
   @Field(() => AccountType)
   @Column({ name: 'account_type' })
@@ -96,7 +88,7 @@ export class Profile {
   line: string;
 
   @Field(() => String, { nullable: true })
-  @Column({ name: 'line_alt' })
+  @Column({ name: 'line_alt', nullable: true })
   lineAlt?: string;
 
   @Field(() => String)
@@ -130,8 +122,6 @@ export class Profile {
       this.firstName = profile.firstName;
       this.lastName = profile.lastName;
       this.phone = profile.phone;
-      this.businessName = profile.businessName;
-      this.industry = profile.industry;
       this.accountType = profile.accountType;
       this.line = profile.line;
       this.lineAlt = profile.lineAlt;

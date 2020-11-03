@@ -42,6 +42,7 @@ if (process.env.NODE_ENV) {
     database: 'skore_dev',
     synchronize: false,
     logging: true,
+    entities: [`src/**/*.entity{.ts,.js}`],
     migrations: [`migration/**/*{.ts,.js}`],
     subscribers: [`subscriber/**/*{.ts,.js}`],
     cli: {
