@@ -11,10 +11,10 @@ qaltrak-dev:
 		.
 
 up:
-	docker-compose -f zarf/compose/compose.yaml -f zarf/compose/compose-debug-config.yaml up --detach --remove-orphans
+	docker-compose -f zarf/compose/compose.yaml up --detach --remove-orphans
 
 down:
-	docker-compose -f zarf/compose/compose.yaml -f zarf/compose/compose-debug-config.yaml down --remove-orphans
+	docker-compose -f zarf/compose/compose.yaml down --remove-orphans
 
 logs:
-	docker-compose -f zarf/compose/compose.yaml -f zarf/compose/compose-debug-config.yaml logs -f 
+	docker-compose -f zarf/compose/compose.yaml logs -f 
