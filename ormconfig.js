@@ -1,23 +1,25 @@
 let config = {};
 let environments = {
   production: {
-    type: 'postgres',
-    url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost/logistic_dev',
+    type: "postgres",
+    url:
+      process.env.DATABASE_URL ||
+      "postgresql://postgres:postgres@localhost/logistic_dev",
     synchronize: false,
     logging: true,
     cli: {
-      migrationsDir: 'src/migration',
-      subscribersDir: 'dist/subscriber',
+      migrationsDir: "src/migration",
+      subscribersDir: "dist/subscriber",
     },
     ssl: true,
   },
   test: {
-    type: 'postgres',
-    host: 'localhost',
+    type: "postgres",
+    host: "localhost",
     port: 5433, // dcoker-compose DB port,
-    username: 'postgres',
-    password: 'postgres',
-    database: 'skore_test',
+    username: "postgres",
+    password: "postgres",
+    database: "skore_test",
     synchronize: false,
     logging: true,
     entities: [`src/**/*.entity{.ts,.js}`],
@@ -25,7 +27,7 @@ let environments = {
     subscribers: [`src/subscriber/**/*{.ts,.js}`],
     cli: {
       migrationsDir: `${__dirname}/migration`,
-      subscribersDir: 'src/subscriber',
+      subscribersDir: "src/subscriber",
     },
   },
 };
@@ -34,12 +36,12 @@ if (process.env.NODE_ENV) {
   config = environments[process.env.NODE_ENV];
 } else {
   config = {
-    type: 'postgres',
-    host: 'localhost',
+    type: "postgres",
+    host: "localhost",
     port: 5433,
-    username: 'postgres',
-    password: 'postgres',
-    database: 'skore_dev',
+    username: "postgres",
+    password: "postgres",
+    database: "skore_dev",
     synchronize: false,
     logging: true,
     entities: [`src/**/*.entity{.ts,.js}`],
@@ -47,7 +49,7 @@ if (process.env.NODE_ENV) {
     subscribers: [`subscriber/**/*{.ts,.js}`],
     cli: {
       migrationsDir: `./migration`,
-      subscribersDir: 'src/subscriber',
+      subscribersDir: "src/subscriber",
     },
   };
 }

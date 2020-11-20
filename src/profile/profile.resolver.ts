@@ -1,15 +1,15 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
-import { AuthGuard } from '@skore/auth';
-import { UseGuards, Logger, UseFilters } from '@nestjs/common';
-import { Profile } from './profile.entity';
-import { ProfileService } from './profile.service';
-import { CurrentUser } from '../user/currentUser.decorator';
-import { User } from '../user/model/User';
-import { CreateProfileInput, UpdateProfileInput } from './dto/profile.dto';
-import { ExceptionLoggerFilter } from '@skore/skore-exception/exception-logger.filter';
+import { Resolver, Query, Args, Mutation } from "@nestjs/graphql";
+import { AuthGuard } from "@skore/auth";
+import { UseGuards, Logger, UseFilters } from "@nestjs/common";
+import { Profile } from "./profile.entity";
+import { ProfileService } from "./profile.service";
+import { CurrentUser } from "../user/currentUser.decorator";
+import { User } from "../user/model/User";
+import { CreateProfileInput, UpdateProfileInput } from "./dto/profile.dto";
+import { ExceptionLoggerFilter } from "@skore/skore-exception/exception-logger.filter";
 
 @UseFilters(new ExceptionLoggerFilter())
-@Resolver('Profile')
+@Resolver("Profile")
 export class ProfileResolver {
   constructor(private readonly profileService: ProfileService) {}
 
@@ -17,22 +17,18 @@ export class ProfileResolver {
   @Query(() => Profile)
   async getProfile(@CurrentUser() user: User): Promise<Profile> {
     const profile = await this.profileService.getProfile(
-      user.sub.split('|')[1],
+      user.sub.split("|")[1]
     );
     return profile;
   }
 
-  @UseGuards(AuthGuard)
   @Mutation(() => Profile)
   async createProfile(
-    @Args('profile') params: CreateProfileInput,
-    @CurrentUser() user: User,
+    @Args("profile") params: CreateProfileInput,
+    @CurrentUser() user: User
   ): Promise<Profile> {
     try {
-      const createdProfile = await this.profileService.createProfile({
-        ...params,
-        userId: user.sub.split('|')[1],
-      });
+      const createdProfile = await this.profileService.createProfile(params);
       if (createdProfile) {
         return createdProfile;
       }
@@ -46,11 +42,11 @@ export class ProfileResolver {
   @Mutation(() => Profile)
   async updateProfile(
     @CurrentUser() user: User,
-    @Args('profile') params: UpdateProfileInput,
+    @Args("profile") params: UpdateProfileInput
   ): Promise<Profile> {
     const profile = this.profileService.updateProfile(
       params,
-      user.sub.split('|')[1],
+      user.sub.split("|")[1]
     );
     return profile;
   }
@@ -59,7 +55,7 @@ export class ProfileResolver {
   @Mutation(() => Profile)
   async deleteProfile(@CurrentUser() user: User): Promise<Profile> {
     const deleteResult = await this.profileService.deleteProfile(
-      user.sub.split('|')[1],
+      user.sub.split("|")[1]
     );
     return deleteResult;
   }

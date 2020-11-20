@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
-import { updatedProfileFactory } from './profileTest.dto';
+import gql from "graphql-tag";
+import { updatedProfileFactory } from "./profileTest.dto";
 
 export const getProfileQuery = {
   query: gql`
@@ -57,20 +57,22 @@ export const createProfile = {
   `,
   variables: {
     profile: {
-      firstName: 'Femi',
-      lastName: 'Adeojo',
-      phone: '6131231234',
-      accountType: 'SHIPPER',
-      city: 'Ottawa',
-      country: 'Canada',
-      line: '26 Auriga Drive',
-      placeId: '12345',
-      postalCode: 'A1A 1A1',
-      state: 'ON',
+      firstName: "Femi",
+      lastName: "Adeojo",
+      phone: "6131231234",
+      accountType: "SHIPPER",
+      city: "Ottawa",
+      country: "Canada",
+      line: "26 Auriga Drive",
+      placeId: "12345",
+      postalCode: "A1A 1A1",
+      state: "ON",
       location: {
-        type: 'Point',
+        type: "Point",
         coordinates: [-74.111111, 45.111111],
       },
+      email: "test@test.io",
+      password: "9a$$w0rD",
     },
   },
 };

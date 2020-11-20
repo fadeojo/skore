@@ -43,8 +43,8 @@ if (process.env.NODE_ENV) {
 } else {
   config = {
     type: 'postgres',
-    host: 'skore-db',
-    port: 5432,
+    host: 'localhost',
+    port: 5433,
     username: 'postgres',
     password: 'postgres',
     database: 'skore_dev',

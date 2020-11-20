@@ -1,16 +1,16 @@
-import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { GraphQLModule } from '@nestjs/graphql';
-import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule, AuthenticationMiddleware } from '@skore/auth';
-import { UserModule } from './user/user.module';
-import { ProfileModule } from './profile/profile.module';
-import { MailerModule } from '@skore/mailer';
-import ormConfig from '../config/orm.config';
-import authConfig from '../config/auth.config';
-import mailerConfig from '../config/mailer.config';
+import { Module, MiddlewareConsumer, RequestMethod } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { GraphQLModule } from "@nestjs/graphql";
+import { AppService } from "./app.service";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { AuthModule, AuthenticationMiddleware } from "@skore/auth";
+import { UserModule } from "./user/user.module";
+import { ProfileModule } from "./profile/profile.module";
+import { MailerModule } from "@skore/mailer";
+import ormConfig from "../config/orm.config";
+import authConfig from "../config/auth.config";
+import mailerConfig from "../config/mailer.config";
 
 interface appConfigResult {
   apolloServerConfig: {
@@ -20,7 +20,7 @@ interface appConfigResult {
 }
 
 const appConfig = (): appConfigResult => {
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.NODE_ENV === "test") {
     return { apolloServerConfig: {} };
   }
   return {
@@ -40,7 +40,7 @@ const appConfig = (): appConfigResult => {
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => {
         return {
-          ...config.get('database'),
+          ...config.get("database"),
           autoLoadEntities: true,
         };
       },
@@ -49,7 +49,7 @@ const appConfig = (): appConfigResult => {
     AuthModule,
     UserModule,
     GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql',
+      autoSchemaFile: "schema.gql",
       context: ({ req }) => {
         return { req };
       },
@@ -61,13 +61,4 @@ const appConfig = (): appConfigResult => {
   controllers: [AppController],
   providers: [AppService, ConfigService],
 })
-export class AppModule {
-  public configure(consumer: MiddlewareConsumer): void {
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes({ path: '/', method: RequestMethod.POST });
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes({ path: '/graphql', method: RequestMethod.POST });
-  }
-}
+export class AppModule {}

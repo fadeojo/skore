@@ -24,9 +24,6 @@ export class CreateProfileInputRepositoryDTO {
   firstName: string;
 
   @Field()
-  userId: string;
-
-  @Field()
   lastName: string;
 
   @Field()
@@ -58,13 +55,16 @@ export class CreateProfileInputRepositoryDTO {
 
   @Field(() => LocationInput)
   location: Point;
+
+  @Field(() => String)
+  email: string;
+
+  @Field(() => String)
+  password: string;
 }
 
 @InputType()
-export class CreateProfileInput extends OmitType(
-  CreateProfileInputRepositoryDTO,
-  ['userId'] as const,
-) {}
+export class CreateProfileInput extends CreateProfileInputRepositoryDTO {}
 
 @InputType()
 export class UpdateProfileInput extends PartialType(CreateProfileInput) {}
