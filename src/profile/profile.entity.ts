@@ -4,7 +4,7 @@ import {
   ObjectType,
   registerEnumType,
   Float,
-} from '@nestjs/graphql';
+} from "@nestjs/graphql";
 import {
   Column,
   CreateDateColumn,
@@ -12,24 +12,25 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from 'typeorm';
-import { Point } from 'geojson';
+  OneToMany,
+} from "typeorm";
+import { Point } from "geojson";
+import { Score } from "../score/entities/score.entity";
 
 export enum AccountType {
-  SHIPPER = 'shipper',
-  BROKER = 'broker',
-  DRIVER = 'driver',
+  ADMIN = "admin",
+  USER = "user",
 }
 
 registerEnumType(AccountType, {
-  name: 'AccountType', // this one is mandatory
-  description: 'Account types', // this one is optional
+  name: "AccountType", // this one is mandatory
+  description: "Account types", // this one is optional
 });
 
 @ObjectType()
 export class Location {
   @Field(() => String)
-  type: 'point';
+  type: "point";
 
   @Field(() => [Float])
   coordinates: number[];
@@ -43,15 +44,15 @@ export class Profile {
   id: number;
 
   @Field(() => String)
-  @Column({ name: 'user_id', unique: true })
+  @Column({ name: "user_id", unique: true })
   userId: string;
 
   @Field(() => String)
-  @Column({ name: 'first_name' })
+  @Column({ name: "first_name" })
   firstName: string;
 
   @Field(() => String)
-  @Column({ name: 'last_name' })
+  @Column({ name: "last_name" })
   lastName: string;
 
   @Field(() => String)
@@ -59,61 +60,68 @@ export class Profile {
   phone: string;
 
   @Field(() => AccountType)
-  @Column({ name: 'account_type' })
+  @Column({ name: "account_type" })
   accountType: AccountType;
 
   @Field(() => String)
   @CreateDateColumn({
-    type: 'timestamptz',
-    name: 'created_at',
+    type: "timestamptz",
+    name: "created_at",
   })
   createdAt: string;
 
   @Field(() => String)
   @UpdateDateColumn({
-    type: 'timestamptz',
-    name: 'updated_at',
+    type: "timestamptz",
+    name: "updated_at",
   })
   updatedAt: string;
 
   @Field(() => String, { nullable: true })
   @DeleteDateColumn({
-    type: 'timestamptz',
-    name: 'deleted_at',
+    type: "timestamptz",
+    name: "deleted_at",
   })
   deletedAt: string;
 
   @Field(() => String)
-  @Column({ name: 'line' })
+  @Column({ name: "line" })
   line: string;
 
   @Field(() => String, { nullable: true })
-  @Column({ name: 'line_alt', nullable: true })
+  @Column({ name: "line_alt", nullable: true })
   lineAlt?: string;
 
   @Field(() => String)
-  @Column({ name: 'city' })
+  @Column({ name: "city" })
   city: string;
 
   @Field(() => String)
-  @Column({ name: 'state' })
+  @Column({ name: "state" })
   state: string;
 
   @Field(() => String)
-  @Column({ name: 'postal_code' })
+  @Column({ name: "postal_code" })
   postalCode: string;
 
   @Field(() => String)
-  @Column({ name: 'place_id' })
+  @Column({ name: "place_id" })
   placeId: string;
 
   @Field(() => String)
-  @Column({ name: 'country' })
+  @Column({ name: "country" })
   country: string;
 
   @Field(() => Location)
-  @Column('geometry')
+  @Column("geometry")
   location: Point;
+
+  @OneToMany(
+    () => Score,
+    (scores) => scores.profile,
+    { eager: true }
+  )
+  scores: Score[];
 
   constructor(profile?: Profile) {
     if (profile) {
@@ -131,6 +139,7 @@ export class Profile {
       this.placeId = profile.placeId;
       this.country = profile.country;
       this.location = profile.location;
+      this.scores = profile.scores;
       this.createdAt = profile.createdAt;
       this.updatedAt = profile.updatedAt;
       this.deletedAt = profile.deletedAt;

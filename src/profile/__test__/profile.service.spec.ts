@@ -29,7 +29,7 @@ describe("ProfileService", () => {
     firstName: "Femi",
     lastName: "Adeojo",
     phone: "6131231234",
-    accountType: AccountType.SHIPPER,
+    accountType: AccountType.ADMIN,
     city: "Ottawa",
     country: "Canada",
     line: "26 Auriga Drive",
@@ -54,11 +54,11 @@ describe("ProfileService", () => {
     createdProfile.lineAlt = null;
     const profile = await service.getProfile(`${createdProfile.userId}`);
 
-    expect(createdProfile).toEqual(profile);
+    expect({ ...createdProfile, scores: [] }).toEqual(profile);
   });
 
   it("should create a profile", async () => {
-    const profile = await service.createProfile(testProfile);
+    const profile = await service.createProfile({ ...testProfile, scores: [] });
     const expectedProfile = new Profile({
       ...testProfile,
       id: profile.id,
@@ -66,6 +66,7 @@ describe("ProfileService", () => {
       createdAt: profile.createdAt,
       updatedAt: profile.updatedAt,
       deletedAt: null,
+      scores: [],
     });
     expect(profile).toEqual(expectedProfile);
   });
@@ -82,6 +83,7 @@ describe("ProfileService", () => {
       updatedAt: updatedProfile.updatedAt,
       lineAlt: null,
       deletedAt: null,
+      scores: [],
     });
 
     expect(updatedProfile).toEqual(testUpdatedProfile);

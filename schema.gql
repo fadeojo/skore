@@ -2,6 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Score {
+  """score ID"""
+  id: ID!
+
+  """Numeric weigth of the score"""
+  value: Int!
+
+  """profile ID"""
+  profile_id: Int!
+}
+
 type Location {
   type: String!
   coordinates: [Float!]!
@@ -29,9 +40,8 @@ type Profile {
 
 """Account types"""
 enum AccountType {
-  SHIPPER
-  BROKER
-  DRIVER
+  ADMIN
+  USER
 }
 
 type LoginOutput {
@@ -62,6 +72,7 @@ type Query {
   hello: LoginOutput!
   getUser: User!
   getProfile: Profile!
+  score(id: Int!): Score!
 }
 
 type Mutation {
@@ -69,6 +80,9 @@ type Mutation {
   createProfile(profile: CreateProfileInput!): Profile!
   updateProfile(profile: UpdateProfileInput!): Profile!
   deleteProfile: Profile!
+  createScore(createScoreInput: CreateScoreInput!): Score!
+  updateScore(updateScoreInput: UpdateScoreInput!): Score!
+  removeScore(id: Int!): Score!
 }
 
 input LoginInput {
@@ -91,11 +105,20 @@ input CreateProfileInput {
   location: LocationInput!
   email: String!
   password: String!
+  scores: [CreateScoreInput!]
 }
 
 input LocationInput {
   type: String!
   coordinates: [Float!]!
+}
+
+input CreateScoreInput {
+  """Numeric weigth of the score"""
+  value: Int!
+
+  """profile ID"""
+  profile_id: Int!
 }
 
 input UpdateProfileInput {
@@ -113,4 +136,14 @@ input UpdateProfileInput {
   location: LocationInput
   email: String
   password: String
+  scores: [CreateScoreInput!]
+}
+
+input UpdateScoreInput {
+  """Numeric weigth of the score"""
+  value: Int
+
+  """profile ID"""
+  profile_id: Int
+  id: Int!
 }

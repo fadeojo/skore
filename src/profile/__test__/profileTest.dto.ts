@@ -21,7 +21,7 @@ export const mockProfile = {
   firstName: "Femi",
   lastName: "Adeojo",
   phone: "6131231234",
-  accountType: AccountType.SHIPPER,
+  accountType: AccountType.ADMIN,
   city: "Ottawa",
   country: "Canada",
   line: "26 Auriga Drive",

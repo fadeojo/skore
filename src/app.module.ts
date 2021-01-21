@@ -8,6 +8,7 @@ import { AuthModule, AuthenticationMiddleware } from "@skore/auth";
 import { UserModule } from "./user/user.module";
 import { ProfileModule } from "./profile/profile.module";
 import { MailerModule } from "@skore/mailer";
+import { ScoreModule } from './score/score.module';
 import ormConfig from "../config/orm.config";
 import authConfig from "../config/auth.config";
 import mailerConfig from "../config/mailer.config";
@@ -57,6 +58,7 @@ const appConfig = (): appConfigResult => {
     }),
     ProfileModule,
     MailerModule,
+    ScoreModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],

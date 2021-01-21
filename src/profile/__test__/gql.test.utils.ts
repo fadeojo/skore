@@ -60,7 +60,7 @@ export const createProfile = {
       firstName: "Femi",
       lastName: "Adeojo",
       phone: "6131231234",
-      accountType: "SHIPPER",
+      accountType: "ADMIN",
       city: "Ottawa",
       country: "Canada",
       line: "26 Auriga Drive",

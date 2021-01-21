@@ -5,14 +5,16 @@ import {
   PartialType,
   OmitType,
   ObjectType,
-} from '@nestjs/graphql';
-import { AccountType } from '../profile.entity';
-import { Point } from 'geojson';
+} from "@nestjs/graphql";
+import { AccountType } from "../profile.entity";
+import { Point } from "geojson";
+import { Score } from "../../score/entities/score.entity";
+import { CreateScoreInput } from "../../score/dto/create-score.input";
 
 @InputType()
 export class LocationInput {
   @Field(() => String)
-  type: 'point';
+  type: "point";
 
   @Field(() => [Float])
   coordinates: number[];
@@ -61,6 +63,9 @@ export class CreateProfileInputRepositoryDTO {
 
   @Field(() => String)
   password: string;
+
+  @Field(() => [CreateScoreInput], { nullable: true })
+  scores?: CreateScoreInput[];
 }
 
 @InputType()
