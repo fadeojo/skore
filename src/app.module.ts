@@ -9,6 +9,8 @@ import { UserModule } from "./user/user.module";
 import { ProfileModule } from "./profile/profile.module";
 import { MailerModule } from "@skore/mailer";
 import { ScoreModule } from './score/score.module';
+import { TaskService } from './task/task.service';
+import { TaskModule } from './task/task.module';
 import ormConfig from "../config/orm.config";
 import authConfig from "../config/auth.config";
 import mailerConfig from "../config/mailer.config";
@@ -59,8 +61,9 @@ const appConfig = (): appConfigResult => {
     ProfileModule,
     MailerModule,
     ScoreModule,
+    TaskModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ConfigService],
+  providers: [AppService, ConfigService, TaskService],
 })
 export class AppModule {}
