@@ -1,6 +1,7 @@
 /** @format */
 
-import { Repository } from "typeorm";
+import { INestApplication } from "@nestjs/common/interfaces/nest-application.interface";
+import { Repository, getConnection } from "typeorm";
 import { testSetup } from "../../testUtils/setup";
 import { Task } from "../entities/task.entity";
 import { TaskService } from "../task.service";
@@ -8,6 +9,7 @@ import { TaskService } from "../task.service";
 describe("TaskService", () => {
   let service: TaskService;
   let repository: Repository<Task>;
+  let testapp: INestApplication;
 
   const taskOne = {
     name: "task one",
@@ -20,14 +22,20 @@ describe("TaskService", () => {
   };
 
   beforeEach(async () => {
-    const { moduleFixture } = await testSetup();
+    const { moduleFixture, app } = await testSetup();
+    testapp = app;
     service = moduleFixture.get<TaskService>(TaskService);
     repository = moduleFixture.get("TaskRepository");
   });
 
   afterEach(async () => {
-    await repository.query(`DELETE FROM  task;`);
-  });
+                                                // if (service) {
+                                            await repository.query(`DELETE FROM  task;`);
+                                            // await getConnection().synchronize(true);
+                                            // close database connections
+                                            await testapp.close();
+                                                // }
+                                              });
 
   it("should be defined", () => {
     expect(service).toBeDefined();

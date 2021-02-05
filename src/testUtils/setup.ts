@@ -10,10 +10,12 @@ import {
 import ormConfig from "../../config/orm.config";
 import { AuthGuard } from "@skore/auth";
 import { MockAuthGuard } from "@skore/auth/auth.guard.mock";
+import { INestApplication } from "@nestjs/common";
 
 interface TestSetup {
   client: ApolloServerTestClient;
   moduleFixture: TestingModule;
+  app: INestApplication;
 }
 
 export const user = {
@@ -61,5 +63,5 @@ export async function testSetup(): Promise<TestSetup> {
   // apolloServer is protected, we need to cast module to any to get it
   const client = createTestClient((module as any).apolloServer);
 
-  return { client, moduleFixture };
+  return { client, moduleFixture, app };
 }
