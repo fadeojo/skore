@@ -3,6 +3,7 @@ import { Column, JoinColumn } from "typeorm";
 import { ManyToOne } from "typeorm";
 import { Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Profile } from "../../profile/profile.entity";
+import { Task } from "../../task/entities/task.entity";
 
 @Entity()
 @ObjectType()
@@ -25,4 +26,11 @@ export class Score {
   )
   @JoinColumn({ name: "profile_id", referencedColumnName: "id" })
   profile: Profile;
+
+  @ManyToOne(
+    () => Task,
+    (task) => task.id
+  )
+  @JoinColumn({ name: "task_id", referencedColumnName: "id" })
+  task: Task;
 }
