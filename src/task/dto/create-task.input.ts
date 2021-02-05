@@ -1,3 +1,5 @@
-/** @format */
 
-export class CreateTaskInput {}
+export class CreateTaskInput {
+  readonly name: string;
+  readonly description: string;
+}

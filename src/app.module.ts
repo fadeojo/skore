@@ -8,8 +8,7 @@ import { AuthModule, AuthenticationMiddleware } from "@skore/auth";
 import { UserModule } from "./user/user.module";
 import { ProfileModule } from "./profile/profile.module";
 import { MailerModule } from "@skore/mailer";
-import { ScoreModule } from './score/score.module';
-import { TaskService } from './task/task.service';
+import { ScoreModule } from "./score/score.module";
 import { TaskModule } from './task/task.module';
 import ormConfig from "../config/orm.config";
 import authConfig from "../config/auth.config";
@@ -41,6 +40,7 @@ const appConfig = (): appConfigResult => {
     ConfigModule.forFeature(mailerConfig),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
+
       useFactory: async (config: ConfigService) => {
         return {
           ...config.get("database"),
@@ -64,6 +64,6 @@ const appConfig = (): appConfigResult => {
     TaskModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ConfigService, TaskService],
+  providers: [AppService, ConfigService],
 })
 export class AppModule {}
