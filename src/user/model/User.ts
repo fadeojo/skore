@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class User {
@@ -9,16 +9,16 @@ export class User {
   aud: string;
 
   @Field()
-  'email_verified': string;
+  "email_verified": string;
 
   @Field()
   exp: number;
 
   @Field()
-  'family_name': string;
+  "family_name": string;
 
   @Field()
-  'given_name': string;
+  "given_name": string;
 
   @Field()
   iat: number;
@@ -39,7 +39,10 @@ export class User {
   sub: string;
 
   @Field()
-  'updated_at': string;
+  userId: string;
+
+  @Field()
+  "updated_at": string;
 
   constructor(user: User) {
     this.email = user.email;
@@ -54,6 +57,7 @@ export class User {
     this.nickname = user.nickname;
     this.picture = user.picture;
     this.sub = user.sub;
+    this.userId = user.userId;
     this.updated_at = user.updated_at;
   }
 }

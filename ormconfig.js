@@ -16,7 +16,7 @@ let environments = {
   test: {
     type: "postgres",
     host: "localhost",
-    port: 5433, // dcoker-compose DB port,
+    port: 5432, // dcoker-compose DB port,
     username: "postgres",
     password: "postgres",
     database: "skore_test",
@@ -38,7 +38,7 @@ if (process.env.NODE_ENV) {
   config = {
     type: "postgres",
     host: "localhost",
-    port: 5433,
+    port: 5432,
     username: "postgres",
     password: "postgres",
     database: "skore_dev",

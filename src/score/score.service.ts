@@ -1,7 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { AccountType, Profile } from "../profile/profile.entity";
 import { CreateScoreInput } from "./dto/create-score.input";
 import { UpdateScoreInput } from "./dto/update-score.input";
 import { Score } from "./entities/score.entity";
@@ -14,25 +19,61 @@ export class ScoreService {
     private readonly configService: ConfigService
   ) {}
 
-  create(createScoreInput: CreateScoreInput): Promise<Score> {
+  private isAdmin(profile) {
+    if (profile.accountType === AccountType.ADMIN) {
+      return;
+    }
+    throw new UnauthorizedException(
+      `The profile with id: ${profile.id} is not allowed to perform this operation`
+    );
+  }
+
+  create(profile: Profile, createScoreInput: CreateScoreInput): Promise<Score> {
+    this.isAdmin(profile);
     const score = this.ScoreReoisitory.create(createScoreInput);
     return this.ScoreReoisitory.save(score);
   }
 
-  findAll() {
-    return `This action returns all score`;
+  findAll(): Promise<Score[]> {
+    return this.ScoreReoisitory.find();
   }
 
   async findOne(id: number): Promise<Score> {
     const score = await this.ScoreReoisitory.findOne(id);
-    return score;
+    if (score) {
+      return score;
+    }
+
+    throw new NotFoundException(`The score with id: ${id} could not be found`);
   }
 
-  update(id: number, updateScoreInput: UpdateScoreInput) {
-    return `This action updates a #${id} score`;
+  async update(
+    profile: Profile,
+    id: number,
+    updateScoreInput: UpdateScoreInput
+  ): Promise<Score> {
+    this.isAdmin(profile);
+    const preloadedScore = await this.ScoreReoisitory.preload({
+      id,
+      ...updateScoreInput,
+    });
+
+    if (preloadedScore) {
+      const updatedScore = await this.ScoreReoisitory.save(preloadedScore);
+      return updatedScore;
+    }
+    throw new NotFoundException(`The score with id: ${id} could not be found`);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} score`;
+  async remove(id: number) {
+    const preloadedScore = await this.findOne(id);
+    if (preloadedScore) {
+      const deletedScore = await this.ScoreReoisitory.softRemove(
+        preloadedScore
+      );
+      return deletedScore;
+    }
+
+    throw new NotFoundException(`The score with id: ${id} could not be found`);
   }
 }

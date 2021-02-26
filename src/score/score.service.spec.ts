@@ -59,13 +59,17 @@ describe("ScoreService", () => {
     const createdProfile = await profileService.createProfile(testProfile);
     createdProfile.lineAlt = null;
     const scoreInput = plainToClass(CreateScoreInput, {
+      name: "Friday",
+      description: "Friday",
       value: 5,
       profile_id: createdProfile.id,
     });
-    const score = await service.create(scoreInput);
+    const score = await service.create(createdProfile, scoreInput);
     expect(
       plainToClass(Score, {
         id: score.id,
+        name: "Friday",
+        description: "Friday",
         value: 5,
         profile_id: createdProfile.id,
       })

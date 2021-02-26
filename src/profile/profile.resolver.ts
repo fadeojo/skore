@@ -24,8 +24,7 @@ export class ProfileResolver {
 
   @Mutation(() => Profile)
   async createProfile(
-    @Args("profile") params: CreateProfileInput,
-    @CurrentUser() user: User
+    @Args("profile") params: CreateProfileInput
   ): Promise<Profile> {
     try {
       const createdProfile = await this.profileService.createProfile(params);

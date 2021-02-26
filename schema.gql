@@ -2,17 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Score {
-  """score ID"""
-  id: ID!
-
-  """Numeric weigth of the score"""
-  value: Int!
-
-  """profile ID"""
-  profile_id: Int!
-}
-
 type Location {
   type: String!
   coordinates: [Float!]!
@@ -44,6 +33,23 @@ enum AccountType {
   USER
 }
 
+type Score {
+  """score ID"""
+  id: ID!
+
+  """Numeric weigth of the score"""
+  value: Int!
+
+  """name of the movie for the score"""
+  name: String!
+
+  """description of the movie for the score"""
+  description: String!
+
+  """profile ID"""
+  profile_id: Int!
+}
+
 type LoginOutput {
   access: String!
   id: String!
@@ -65,6 +71,7 @@ type User {
   nickname: String!
   picture: String!
   sub: String!
+  userId: String!
   updated_at: String!
 }
 
@@ -72,7 +79,6 @@ type Query {
   hello: LoginOutput!
   getUser: User!
   getProfile: Profile!
-  score(id: Int!): Score!
 }
 
 type Mutation {
@@ -81,8 +87,6 @@ type Mutation {
   updateProfile(profile: UpdateProfileInput!): Profile!
   deleteProfile: Profile!
   createScore(createScoreInput: CreateScoreInput!): Score!
-  updateScore(updateScoreInput: UpdateScoreInput!): Score!
-  removeScore(id: Int!): Score!
 }
 
 input LoginInput {
@@ -119,6 +123,12 @@ input CreateScoreInput {
 
   """profile ID"""
   profile_id: Int!
+
+  """name of the movie for the score"""
+  name: String!
+
+  """description of the movie for the score"""
+  description: String!
 }
 
 input UpdateProfileInput {
@@ -137,13 +147,4 @@ input UpdateProfileInput {
   email: String
   password: String
   scores: [CreateScoreInput!]
-}
-
-input UpdateScoreInput {
-  """Numeric weigth of the score"""
-  value: Int
-
-  """profile ID"""
-  profile_id: Int
-  id: Int!
 }

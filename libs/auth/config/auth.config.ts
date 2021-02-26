@@ -1,4 +1,4 @@
-import { registerAs } from '@nestjs/config';
+import { registerAs } from "@nestjs/config";
 interface AuthConfig {
   jwksUri: string;
   issuer: string;
@@ -8,12 +8,12 @@ interface AuthConfig {
 }
 
 export default registerAs(
-  'auth',
+  "auth",
   (): AuthConfig => ({
-    jwksUri: process.env.LOGISTIC_JWKSURI,
-    issuer: process.env.LOGISTIC_ISSUER,
-    clientId: process.env.LOGISTIC_CLIENT_ID,
-    clientSecret: process.env.LOGISTIC_CLIENT_SECRET,
-    realm: process.env.LOGISTIC_REALM,
-  }),
+    jwksUri: process.env.APP_JWKSURI,
+    issuer: process.env.APP_ISSUER,
+    clientId: process.env.APP_CLIENT_ID,
+    clientSecret: process.env.APP_CLIENT_SECRET,
+    realm: process.env.APP_REALM,
+  })
 );

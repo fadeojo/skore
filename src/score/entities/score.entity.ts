@@ -15,6 +15,16 @@ export class Score {
   @Column({ name: "value" })
   value: number;
 
+  @Field(() => String, { description: "name of the movie for the score" })
+  @Column({ name: "name" })
+  name: string;
+
+  @Field(() => String, {
+    description: "description of the movie for the score",
+  })
+  @Column({ name: "description" })
+  description: string;
+
   @Field(() => Int, { description: "profile ID" })
   @Column()
   profile_id: number;

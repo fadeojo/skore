@@ -19,6 +19,7 @@
     "test:cov": "jest --coverage --runInBand --forceExit",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config --runInBand --forceExit ./test/jest-e2e.json",
+    "generate-migration": "npx ts-node ./node_modules/typeorm/cli.js migration:generate -n",
     "migrate-up": "npx ts-node ./node_modules/typeorm/cli.js migration:run",
     "test-migrate-up": "NODE_ENV='test' ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrate-down": "ts-node ./node_modules/typeorm/cli.js migration:revert",

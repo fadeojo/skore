@@ -7,4 +7,12 @@ export class CreateScoreInput {
 
   @Field(() => Int, { description: "profile ID" })
   profile_id: number;
+
+  @Field(() => String, { description: "name of the movie for the score" })
+  name: string;
+
+  @Field(() => String, {
+    description: "description of the movie for the score",
+  })
+  description: string;
 }
