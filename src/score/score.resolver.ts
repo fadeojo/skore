@@ -26,10 +26,10 @@ export class ScoreResolver {
     return this.scoreService.create(profile, createScoreInput);
   }
 
-  // @Query(() => [Score], { name: 'score' })
-  // findAll() {
-  //   return this.scoreService.findAll();
-  // }
+  @Query(() => [Score], { name: "score" })
+  findAll() {
+    return this.scoreService.findAll();
+  }
 
   // @Query(() => Score, { name: 'score' })
   // findOne(@Args('id', { type: () => Int }) id: number) {
@@ -41,8 +41,8 @@ export class ScoreResolver {
   //   return this.scoreService.update(updateScoreInput.id, updateScoreInput);
   // }
 
-  // @Mutation(() => Score)
-  // removeScore(@Args('id', { type: () => Int }) id: number) {
-  //   return this.scoreService.remove(id);
-  // }
+  @Mutation(() => Score)
+  removeScore(@Args("id", { type: () => Int }) id: number) {
+    return this.scoreService.remove(id);
+  }
 }

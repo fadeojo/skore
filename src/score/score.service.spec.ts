@@ -75,4 +75,27 @@ describe("ScoreService", () => {
       })
     ).toEqual(score);
   });
+
+  it("should return an array of scores when 'findAll' is called", async () => {
+    const createdProfile = await profileService.createProfile(testProfile);
+    createdProfile.lineAlt = null;
+    const scoreInput1 = plainToClass(CreateScoreInput, {
+      name: "Friday",
+      description: "Friday",
+      value: 5,
+      profile_id: createdProfile.id,
+    });
+
+    const scoreInput2 = plainToClass(CreateScoreInput, {
+      name: "Saturday",
+      description: "Saturday",
+      value: 6,
+      profile_id: createdProfile.id,
+    });
+    const score1 = await service.create(createdProfile, scoreInput1);
+    const score2 = await service.create(createdProfile, scoreInput2);
+
+    const result = [score1, score2];
+    console.log(result);
+  });
 });

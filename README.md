@@ -1,4 +1,5 @@
 # SKORE
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
@@ -10,6 +11,7 @@ $ yarn
 ```
 
 ## Required environment variables
+
 ```bash
 # Auth0 config
 SKORE_ISSUER="https://dev-5s8ily6g.auth0.com/"
@@ -43,5 +45,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-test update for meagan

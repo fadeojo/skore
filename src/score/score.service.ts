@@ -15,7 +15,7 @@ import { Score } from "./entities/score.entity";
 export class ScoreService {
   constructor(
     @InjectRepository(Score)
-    private readonly ScoreReoisitory: Repository<Score>,
+    private readonly ScoreRepository: Repository<Score>,
     private readonly configService: ConfigService
   ) {}
 
@@ -30,16 +30,16 @@ export class ScoreService {
 
   create(profile: Profile, createScoreInput: CreateScoreInput): Promise<Score> {
     this.isAdmin(profile);
-    const score = this.ScoreReoisitory.create(createScoreInput);
-    return this.ScoreReoisitory.save(score);
+    const score = this.ScoreRepository.create(createScoreInput);
+    return this.ScoreRepository.save(score);
   }
 
   findAll(): Promise<Score[]> {
-    return this.ScoreReoisitory.find();
+    return this.ScoreRepository.find();
   }
 
   async findOne(id: number): Promise<Score> {
-    const score = await this.ScoreReoisitory.findOne(id);
+    const score = await this.ScoreRepository.findOne(id);
     if (score) {
       return score;
     }
@@ -53,13 +53,13 @@ export class ScoreService {
     updateScoreInput: UpdateScoreInput
   ): Promise<Score> {
     this.isAdmin(profile);
-    const preloadedScore = await this.ScoreReoisitory.preload({
+    const preloadedScore = await this.ScoreRepository.preload({
       id,
       ...updateScoreInput,
     });
 
     if (preloadedScore) {
-      const updatedScore = await this.ScoreReoisitory.save(preloadedScore);
+      const updatedScore = await this.ScoreRepository.save(preloadedScore);
       return updatedScore;
     }
     throw new NotFoundException(`The score with id: ${id} could not be found`);
@@ -68,7 +68,7 @@ export class ScoreService {
   async remove(id: number) {
     const preloadedScore = await this.findOne(id);
     if (preloadedScore) {
-      const deletedScore = await this.ScoreReoisitory.softRemove(
+      const deletedScore = await this.ScoreRepository.softRemove(
         preloadedScore
       );
       return deletedScore;
